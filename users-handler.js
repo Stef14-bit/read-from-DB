@@ -13,13 +13,21 @@ const getUsers = (req, res) => {
 };
 
 const getUserId = (req, res) => {
-  database.query("select * from users where id =?", [id]).then(([user]) => {
-    if (user[0] !== null) {
-      res.json(user[0]);
-    } else {
-      res.status(404).send("user not found");
-    }
-  });
+  const id = parseInt(req.params.id);
+
+  database
+    .query("select * from users where id =?", [id])
+    .then(([users]) => {
+      if (users[0] != null) {
+        res.json(users[0]);
+      } else {
+        res.status(404).send("user not found");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send("error connecting to database");
+    });
 };
 
 module.exports = { getUsers, getUserId };

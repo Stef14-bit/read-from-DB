@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.send("Welcome to homepage!");
 });
 
-app.get("/api/users", userHandler);
+app.get("/api/users", userHandler.getUsers);
 app.get("/api/users/:id", userHandler.getUserId);
 
 app.listen(port, (err) => {
