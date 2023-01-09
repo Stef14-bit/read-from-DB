@@ -15,6 +15,7 @@ app.get("/api/users", userHandler.getUsers);
 app.post("/api/users/", userHandler.postUser);
 app.get("/api/users/:id", userHandler.getUserId);
 app.put("/api/users/:id", userHandler.updateUser);
+app.delete("/api/users/:id", userHandler.deleteUser);
 
 app.listen(port, (err) => {
   if (err) {
