@@ -53,5 +53,19 @@ const postUser = (req, res) => {
       res.sendStatus(500);
     });
 };
+const updateUser = (req, res) => {
+  database
+    .query("UPDATE users SET ? WHERE id=?", [req.body, req.params.id])
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.status(404).send("Not Found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      res.status(500).send(err, "Error editing movie");
+    });
+};
 
-module.exports = { getUsers, getUserId, postUser };
+module.exports = { getUsers, getUserId, postUser, updateUser };
